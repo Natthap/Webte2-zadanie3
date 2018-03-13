@@ -1,55 +1,51 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: mzikl
+ * Date: 13.3.2018
+ * Time: 22:10
+ */
 include("php/config.php");
 session_start();
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    // username and password sent from form
-
+if(isset($_POST['login'])) {
     $myusername = mysqli_real_escape_string($db,$_POST['username']);
     $mypassword = mysqli_real_escape_string($db,$_POST['password']);
 
-    $sql = "SELECT id FROM admin WHERE username = '$myusername' and passcode = '$mypassword'";
+    $sql = "SELECT password, id FROM login WHERE username = '$myusername'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    $active = $row['active'];
 
-    $count = mysqli_num_rows($result);
+    echo '<script language="javascript">';
+    echo "alert(\"".$row["password"]."\")";
+    echo '</script>';
 
-    // If result matched $myusername and $mypassword, table row must be 1 row
+    if(password_verify($mypassword, $row["password"])) {
 
-    if($count == 1) {
-        session_register("myusername");
-        $_SESSION['login_user'] = $myusername;
+        $count = mysqli_num_rows($result);
 
-        header("location: subpages/welcome.php");
-    }else {
-        $error = "Your Login Name or Password is invalid";
+        $error = $count;
+
+        echo '<script language="javascript">';
+        echo "alert(\"".$row."\")";
+        echo '</script>';
+
+        if ($count == 1) {
+            $_SESSION['login_user'] = $myusername;
+
+            $format = "Y-m-d";
+
+            $sql = "INSERT INTO historyOfLogins (_prihlasenia, typ, datum) VALUES (\"" . $row["id"] . "\", \"Vlastna databaza\", \"" . date($format) . "\")";
+
+            mysqli_query($db, $sql);
+
+            header("location: index.php?page=welcome");
+        } else {
+            $error = "Your Login Name or Password is invalid";
+        }
     }
 }
 ?>
-<html>
-
-<head>
-    <title>Login Page</title>
-
-    <style type = "text/css">
-        body {
-            font-family:Arial, Helvetica, sans-serif;
-            font-size:14px;
-        }
-        label {
-            font-weight:bold;
-            width:100px;
-            font-size:14px;
-        }
-        .box {
-            border:#666666 solid 1px;
-        }
-    </style>
-
-</head>
-
-<body bgcolor = "#FFFFFF">
 
 <div align = "center">
     <div style = "width:300px; border: solid 1px #333333; " align = "left">
@@ -57,10 +53,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div style = "margin:30px">
 
-            <form action = "" method = "post">
+            <form action = "index.php?page=login" method = "post" name="login">
                 <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
                 <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                <input type = "submit" value = " Submit "/><br />
+                <input type = "submit" value = " Submit " name="login"/><br />
             </form>
 
             <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
@@ -70,6 +66,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 </div>
-
-</body>
-</html>
