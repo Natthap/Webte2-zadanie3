@@ -16,33 +16,24 @@ if(isset($_POST['login'])) {
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    echo '<script language="javascript">';
-    echo "alert(\"".$row["password"]."\")";
-    echo '</script>';
+    $count = mysqli_num_rows($result);
 
-    if(password_verify($mypassword, $row["password"])) {
+    $error = $count;
 
-        $count = mysqli_num_rows($result);
+    if($count == 1 && password_verify($mypassword, $row["password"])) {
 
-        $error = $count;
+        $_SESSION['login_user'] = $myusername;
 
-        echo '<script language="javascript">';
-        echo "alert(\"".$row."\")";
-        echo '</script>';
+        $format = "Y-m-d";
 
-        if ($count == 1) {
-            $_SESSION['login_user'] = $myusername;
+        $sql = "INSERT INTO historyOfLogins (_prihlasenia, typ, datum) VALUES (\"" . $row["id"] . "\", \"Vlastna databaza\", \"" . date($format) . "\")";
 
-            $format = "Y-m-d";
+        mysqli_query($db, $sql);
 
-            $sql = "INSERT INTO historyOfLogins (_prihlasenia, typ, datum) VALUES (\"" . $row["id"] . "\", \"Vlastna databaza\", \"" . date($format) . "\")";
+        header("location: index.php?page=welcome");
 
-            mysqli_query($db, $sql);
-
-            header("location: index.php?page=welcome");
-        } else {
-            $error = "Your Login Name or Password is invalid";
-        }
+    } else {
+        $error = "Your Login Name or Password is invalid";
     }
 }
 ?>
