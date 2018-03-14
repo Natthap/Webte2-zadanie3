@@ -14,10 +14,6 @@ if(isset($_POST['signIn'])) {
 
     $mypassword = password_hash($mypassword, PASSWORD_BCRYPT, $options);
 
-    echo '<script language="javascript">';
-    echo 'alert("'.$mypassword.'")';
-    echo '</script>';
-
     $sql = "SELECT id FROM login WHERE username = '$myusername'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -32,32 +28,40 @@ if(isset($_POST['signIn'])) {
 
         mysqli_query($db,$sql);
 
-        header("location: index.php?page=login");
+        $messageSign = "User created!";
+
+        header("location: index.php");
     }else {
-        echo '<script language="javascript">';
-        echo 'alert("User with that name already exist")';
-        echo '</script>';
+        $messageSign = "User with that name already exists!";
     }
 }
 ?>
-<form action="index.php?page=signin" style="border:1px solid #ccc" method = "post" name="signIn">
-  <div class="container">
-    <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
+<div align = "center">
+    <div style = "width:500px; border: solid 1px #333333; " align = "left">
+        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
 
-    <label for="Username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
+        <div style = "margin:30px">
+            <form action="index.php" style="border:1px solid #ccc" method = "post" name="signIn">
+              <div class="container">
+                <h1>Sign Up</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+                <label for="Username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+                  <br /><br />
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                  <br /><br />
+                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn" name="signIn">Sign Up</button>
+                <div class="clearfix">
+                  <button type="submit" class="signupbtn" name="signIn">Sign Up</button>
+                </div>
+              </div>
+            </form>
+            <div style = "font-size:14px; color:#cc0000; margin-top:10px"><?php echo $messageSign; ?></div>
+        </div>
     </div>
-  </div>
-</form>
+</div>

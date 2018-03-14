@@ -6,7 +6,6 @@
  * Time: 14:06
  */
 session_start();
-
 //Include Google client library
 include_once 'src/Google_Client.php';
 include_once 'src/contrib/Google_Oauth2Service.php';
@@ -14,10 +13,9 @@ include_once 'src/contrib/Google_Oauth2Service.php';
 /*
  * Configuration and setup Google API
  */
-$clientId = "414728206665-1f1oq6skqpq0k64dladtm3dlqruba167.apps.googleusercontent.com";
-$clientSecret = "qsrn7tjjwOHX5eR9BiN8SWuE";
-$redirectURL = "https://147.175.99.44.xip.io/zadanie3/index.php?page=logingoogle";
-
+$clientId = "414728206665-qr3ggvrf5gigqdl5aa0p8vvb7cneomr7.apps.googleusercontent.com";
+$clientSecret = "jy47OcaDrI8skKpSrEW3SvLv";
+$redirectURL = "https://147.175.99.44.xip.io/zadanie3/index.php";
 //Call Google API
 $gClient = new Google_Client();
 $gClient->setApplicationName('Zadanie3');

@@ -33,7 +33,7 @@ if(isset($_POST['login'])) {
         header("location: index.php?page=welcome");
 
     } else {
-        $error = "Your Login Name or Password is invalid";
+        $messageL = "Your Login Name or Password is invalid";
     }
 }
 ?>
@@ -44,18 +44,17 @@ if(isset($_POST['login'])) {
 
         <div style = "margin:30px">
 
-            <form action = "index.php?page=login" method = "post" name="login">
+            <form action = "index.php" method = "post" name="login">
                 <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
                 <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
                 <input type = "submit" value = " Submit " name="login"/><br />
             </form>
 
-            <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+            <div style = "font-size:14px; color:#cc0000; margin-top:10px"><?php echo $messageL; ?></div>
 
         </div>
 
     </div>
 
 </div>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 

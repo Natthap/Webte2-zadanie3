@@ -1,9 +1,6 @@
 <html>
 <head>
     <title>Zadanie3</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="js/googleAuth.js"></script>
-    <meta name="google-signin-client_id" content="414728206665-qr3ggvrf5gigqdl5aa0p8vvb7cneomr7.apps.googleusercontent.com">
 
     <style type = "text/css">
         body {
@@ -29,6 +26,8 @@
  * Time: 21:51
  */
 
+
+
 $page = $_GET["page"];
 switch ($page){
     case "login":
@@ -43,11 +42,11 @@ switch ($page){
     case "signin":
         include "subpages/signIn.php";
         break;
-    /*case "newDetail":
-        createUserDetailForm(getAllUserNames(), getAllOh());
-        break;*/
+    case "logingoogle":
+        include "subpages/gLogin.php";
+        break;
     default:
-        include "subpages/login.php";
+        include "subpages/mainPage.php";
         break;
 }
 ?>
