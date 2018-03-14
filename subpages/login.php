@@ -33,14 +33,14 @@ if(isset($_POST['login'])) {
         header("location: index.php?page=welcome");
 
     } else {
-        $messageL = "Your Login Name or Password is invalid";
+        $message = "Your Login Name or Password is invalid";
     }
 }
 ?>
 
 <div align = "center">
     <div style = "width:300px; border: solid 1px #333333; " align = "left">
-        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login DB</b></div>
 
         <div style = "margin:30px">
 
@@ -50,7 +50,7 @@ if(isset($_POST['login'])) {
                 <input type = "submit" value = " Submit " name="login"/><br />
             </form>
 
-            <div style = "font-size:14px; color:#cc0000; margin-top:10px"><?php echo $messageL; ?></div>
+            <div style = "font-size:14px; color:#cc0000; margin-top:10px"><?php echo $message; ?></div>
 
         </div>
 

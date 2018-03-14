@@ -16,7 +16,7 @@ if(isset($_GET['code'])){
 
     $format = "Y-m-d";
 
-    $sql = "INSERT INTO historyOfLogins (_prihlasenia, typ, datum) VALUES (\"" . $gpUserProfile["id"] . "\", \"Google\", \"" . date($format) . "\")";
+    $sql = "INSERT INTO historyOfLogins (_prihlasenia, typ, datum) VALUES (\"".$gpUserProfile["id"]."\", \"Google\", \"" . date($format) . "\")";
 
     mysqli_query($db, $sql);
 

@@ -38,7 +38,7 @@ if(isset($_POST['signIn'])) {
 ?>
 <div align = "center">
     <div style = "width:500px; border: solid 1px #333333; " align = "left">
-        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+        <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Sign in</b></div>
 
         <div style = "margin:30px">
             <form action="index.php" style="border:1px solid #ccc" method = "post" name="signIn">
