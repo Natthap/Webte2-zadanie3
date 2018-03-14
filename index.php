@@ -1,6 +1,9 @@
 <html>
 <head>
     <title>Zadanie3</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/googleAuth.js"></script>
+    <meta name="google-signin-client_id" content="414728206665-qr3ggvrf5gigqdl5aa0p8vvb7cneomr7.apps.googleusercontent.com">
 
     <style type = "text/css">
         body {
@@ -16,7 +19,6 @@
             border:#666666 solid 1px;
         }
     </style>
-
 </head>
 <body>
 <?php

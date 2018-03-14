@@ -5,7 +5,7 @@
  * Date: 13.3.2018
  * Time: 22:10
  */
-include("php/config.php");
+include("config/config.php");
 session_start();
 
 if(isset($_POST['signIn'])) {
